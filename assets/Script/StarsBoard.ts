@@ -37,9 +37,9 @@ export class StarsBoard extends cc.Object {
 	}
 	public toString():string{
 		let str:string="";
-		for(let i=0;i<this._xNum;i++){
-			for(let j=this._yNum-1;j>=0;j--){
-				str+=this._list[i][j]+" ";
+		for(let x=0;x<this._xNum;x++){
+			for(let y=this._yNum-1;y>=0;y--){
+				str+=this._list[x][y]+" ";
 			}
 			str+="\n";
 		}

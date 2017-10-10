@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "f2ec57a0-0aa4-49e2-b721-17eb76fc0533",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "Shop_Onece": {
+      "ver": "1.0.3",
+      "uuid": "6ba86842-097d-4ca5-bc90-085cab9553a4",
+      "rawTextureUuid": "f2ec57a0-0aa4-49e2-b721-17eb76fc0533",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 104,
+      "height": 94,
+      "rawWidth": 104,
+      "rawHeight": 94,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

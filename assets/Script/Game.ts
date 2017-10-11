@@ -17,7 +17,6 @@ export class Game extends cc.Component {
    
     public onLoad() {
         cc.log("=== start Game ===");
-
     }
     public gotoTitle():void{
         cc.log("gotoTitle");
@@ -46,7 +45,7 @@ export class Game extends cc.Component {
         stars.init(10,10);
         stars.setWithData(levelData);
         cc.log(stars.toString());
-        stars.pop(0,0);
-        cc.log(stars.toString());
+        stars.pop(5,3);
+        //cc.log(stars.toString());
     }
 }

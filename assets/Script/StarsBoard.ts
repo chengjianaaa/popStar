@@ -1,4 +1,12 @@
 const {ccclass, property} = cc._decorator;
+export enum StarType{
+    NOTHING=0,
+    RED=1,
+    GREEN=2,
+    BLUE=3,
+    YELLOW=4,
+    PURPLE=5
+}
 @ccclass 
 export class StarsBoard extends cc.Object {
 	private _list:number[][];
@@ -20,8 +28,8 @@ export class StarsBoard extends cc.Object {
 			throw new Error("data length not match starsBoard size");
 		}
 		var id:number=0;
-		for(let x=0;x<this._xNum;x++){
-			for(let y=this._yNum-1;y>=0;y--){
+		for(let y=this._yNum-1;y>=0;y--){
+			for(let x=0;x<this._xNum;x++){
 				this.setValue(x,y,data[id]);
 				id++;
 			}
@@ -37,14 +45,16 @@ export class StarsBoard extends cc.Object {
 	}
 	public toString():string{
 		let str:string="";
-		for(let x=0;x<this._xNum;x++){
-			for(let y=this._yNum-1;y>=0;y--){
+		for(let y=this._yNum-1;y>=0;y--){
+			for(let x=0;x<this._xNum;x++){
 				str+=this._list[x][y]+" ";
 			}
 			str+="\n";
 		}
 		return str;
 	}
+
+
 	
 
 }

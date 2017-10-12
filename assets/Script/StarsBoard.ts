@@ -1,4 +1,5 @@
 const {ccclass, property} = cc._decorator;
+
 export enum StarType{
     NOTHING=0,
     RED=1,
@@ -7,6 +8,7 @@ export enum StarType{
     YELLOW=4,
     PURPLE=5
 }
+
 @ccclass 
 export class StarsBoard extends cc.Object {
 	private _list:number[][];
@@ -23,6 +25,7 @@ export class StarsBoard extends cc.Object {
 			}
 		}
 	}
+
 	public setWithData(data:number[]):void{
 		if(data.length!=this._xNum*this._yNum){
 			throw new Error("data length not match starsBoard size");
@@ -35,14 +38,54 @@ export class StarsBoard extends cc.Object {
 			}
 		}
 	}
+
 	public setValue(x:number,y:number,value:number):void{
 		this._list[x][y]=value;
 	}
-	public pop(x:number,y:number):cc.Vec2[]{
-		let list:cc.Vec2[]=[];
-		cc.log("pos:",this._list[x][y]);
-		return list;
+	public getValue(x:number,y:number):number{
+		return this._list[x][y];
 	}
+
+	public pop(x:number,y:number):cc.Vec2[]{
+		let results:cc.Vec2[]=[];
+		this.findFill(x,y,results);
+		this.printPopResult(results,this.getValue(x,y));
+		return results;
+	}
+
+	private findFill(x:number,y:number,results:cc.Vec2[]):void{
+		let curValue:number=this.getValue(x,y);
+		if(curValue==StarType.NOTHING)return;
+		if(this.getResultsHasXY(results,x,y))return;
+		results.push(cc.p(x,y));
+		let x1:number,y1:number;
+		//top
+		x1=x;
+		y1=Math.min(this._yNum-1,y+1);
+		if(this.getValue(x1,y1)==curValue)this.findFill(x1,y1,results);
+		//bottom
+		x1=x;
+		y1=Math.max(0,y-1);
+		if(this.getValue(x1,y1)==curValue)this.findFill(x1,y1,results);
+		//left
+		x1=Math.max(0,x-1);
+		y1=y;
+		if(this.getValue(x1,y1)==curValue)this.findFill(x1,y1,results);
+		//right
+		x1=Math.min(this._xNum-1,x+1);
+		y1=y;
+		if(this.getValue(x1,y1)==curValue)this.findFill(x1,y1,results);
+	}
+	
+	private getResultsHasXY(results:cc.Vec2[],x:number,y:number):boolean{
+		for(let i=0;i<results.length;i++){
+			if(results[i].x==x&&results[i].y==y){
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public toString():string{
 		let str:string="";
 		for(let y=this._yNum-1;y>=0;y--){
@@ -52,6 +95,29 @@ export class StarsBoard extends cc.Object {
 			str+="\n";
 		}
 		return str;
+	}
+
+	public printPopResult(results:cc.Vec2[],value:number):void{
+		let tmpList:number[][]=[];
+		for(let x=0;x<this._xNum;x++){
+			tmpList[x]=[];
+			for(let y=0;y<this._yNum;y++){
+				tmpList[x][y]=0;
+			}
+		}
+
+		for(let i=0;i<results.length;i++){
+			tmpList[results[i].x][results[i].y]=value;
+		}
+
+		let str:string="";
+		for(let y=this._yNum-1;y>=0;y--){
+			for(let x=0;x<this._xNum;x++){
+				str+=tmpList[x][y]+" ";
+			}
+			str+="\n";
+		}
+		cc.log(str);
 	}
 
 

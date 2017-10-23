@@ -46,6 +46,6 @@ export class Game extends cc.Component {
         stars.setWithData(levelData);
         cc.log(stars.toString());
         stars.pop(5,3);
-        //cc.log(stars.toString());
+        cc.log(stars.toString());
     }
 }

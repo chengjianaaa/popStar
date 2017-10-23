@@ -50,6 +50,7 @@ export class StarsBoard extends cc.Object {
 		let results:cc.Vec2[]=[];
 		this.findFill(x,y,results);
 		this.printPopResult(results,this.getValue(x,y));
+		this.deletePosList(results);
 		return results;
 	}
 
@@ -86,8 +87,19 @@ export class StarsBoard extends cc.Object {
 		return false;
 	}
 
+	private deletePosList(posList:cc.Vec2[]):void{
+		let minX=this._xNum-1, maxX=0;
+		for(let i=0;i<posList.length;i++){
+			let x=posList[i].x;
+			let y=posList[i].y;
+			this._list[x][y]=StarType.NOTHING;
+			minX=Math.min(minX,x);
+			maxX=Math.max(maxX,x);
+		}
+	}
+
 	public toString():string{
-		let str:string="";
+		let str="";
 		for(let y=this._yNum-1;y>=0;y--){
 			for(let x=0;x<this._xNum;x++){
 				str+=this._list[x][y]+" ";

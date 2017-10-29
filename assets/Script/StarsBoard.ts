@@ -30,7 +30,7 @@ export class StarsBoard extends cc.Object {
 		if(data.length!=this._xNum*this._yNum){
 			throw new Error("data length not match starsBoard size");
 		}
-		var id:number=0;
+		let id:number=0;
 		for(let y=this._yNum-1;y>=0;y--){
 			for(let x=0;x<this._xNum;x++){
 				this.setValue(x,y,data[id]);
@@ -87,14 +87,27 @@ export class StarsBoard extends cc.Object {
 		return false;
 	}
 
-	private deletePosList(posList:cc.Vec2[]):void{
-		let minX=this._xNum-1, maxX=0;
+	private deletePosList(posList:cc.Vec2[]):cc.Rect{
+		let xmin=this._xNum-1, xmax=0;
 		for(let i=0;i<posList.length;i++){
 			let x=posList[i].x;
 			let y=posList[i].y;
 			this._list[x][y]=StarType.NOTHING;
-			minX=Math.min(minX,x);
-			maxX=Math.max(maxX,x);
+			xmin=Math.min(xmin,x);
+			xmax=Math.max(xmax,x);
+		}
+		let ymin, ymax;
+		return cc.rect(xmin,ymin,xmax,ymax);
+	}
+
+	public drop(xmin:number,xmax:number):void{
+		for(let x=xmin;x<xmax;x++){
+			let emptyNum=0;
+			for(let y=0;y<this._yNum;y++){
+				if(this._list[x][y]==StarType.NOTHING){
+					emptyNum++;
+				}
+			}
 		}
 	}
 

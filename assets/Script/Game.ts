@@ -1,7 +1,6 @@
 const {ccclass, property} = cc._decorator;
 import {LevelStartText} from "./LevelStartText";
-import {StarsBoard} from "./StarsBoard";
-import{LevelData}from"./LevelData";
+import{Map}from"./Map";
 @ccclass 
 export class Game extends cc.Component {
     @property(cc.Node)
@@ -13,7 +12,7 @@ export class Game extends cc.Component {
     @property(cc.Node)
     private levelStartText:cc.Node=null;
 
-    private level:number;
+    private _level:number;
    
     public onLoad() {
         cc.log("=== start Game ===");
@@ -33,19 +32,17 @@ export class Game extends cc.Component {
     }
     public gotoLevel(level:number):void{
         cc.log("gotoLevel:",level);
-        this.level=level;
+        this._level=level;
         this.gameBg.active=true;
         this.levelStartText.active=true;
         this.levelStartText.getComponent(LevelStartText).setOnCompleteCallback(this.layoutLevel,this);
     }
     private layoutLevel():void{
         cc.log("layoutBlocks=======");
-        let levelData=LevelData.getData(this.level);
-        let stars=new StarsBoard();
-        stars.init(10,10);
-        stars.setWithData(levelData);
-        cc.log(stars.toString());
-        stars.pop(5,3);
-        cc.log(stars.toString());
+        Map.create(this);
     }
+
+    public get level():number{return this._level;}
+
+
 }

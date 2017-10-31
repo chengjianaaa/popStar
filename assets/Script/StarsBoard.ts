@@ -1,5 +1,5 @@
-const {ccclass, property} = cc._decorator;
-
+const { ccclass, property } = cc._decorator;
+    
 export enum StarType{
     NOTHING=0,
     RED=1,
@@ -104,8 +104,12 @@ export class StarsBoard extends cc.Object {
 		for(let x=xmin;x<xmax;x++){
 			let emptyNum=0;
 			for(let y=0;y<this._yNum;y++){
-				if(this._list[x][y]==StarType.NOTHING){
-					emptyNum++;
+				let value=this._list[x][y];
+				if(value==StarType.NOTHING){
+                    emptyNum++;
+				}else{
+					this._list[x][y]=StarType.NOTHING;
+					this._list[x][y-emptyNum]=value;
 				}
 			}
 		}

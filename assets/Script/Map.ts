@@ -22,7 +22,11 @@ export class Map extends cc.Object {
         this._stars.init(10,10);
         this._stars.setWithData(levelData);
         cc.log(this._stars.toString());
-        this._stars.pop(5,3);
+        let outList:cc.Vec2[]=[];
+        let bounds=this._stars.pop(5,3,outList);
+        //cc.log(outList);
+        cc.log(this._stars.toString());
+        this._stars.drop(bounds);
         cc.log(this._stars.toString());
     }
 }

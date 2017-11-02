@@ -46,12 +46,12 @@ export class StarsBoard extends cc.Object {
 		return this._list[x][y];
 	}
 
-	public pop(x:number,y:number):cc.Vec2[]{
-		let results:cc.Vec2[]=[];
+	public pop(x:number,y:number,results:cc.Vec2[]=null):cc.Rect{
+		if(!results)results=[];
 		this.findFill(x,y,results);
 		this.printPopResult(results,this.getValue(x,y));
-		this.deletePosList(results);
-		return results;
+		let bounds:cc.Rect=this.deletePosList(results);
+		return bounds;
 	}
 
 	private findFill(x:number,y:number,results:cc.Vec2[]):void{
@@ -87,23 +87,28 @@ export class StarsBoard extends cc.Object {
 		return false;
 	}
 
-	private deletePosList(posList:cc.Vec2[]):cc.Rect{
+	public deletePosList(posList:cc.Vec2[]):cc.Rect{
 		let xmin=this._xNum-1, xmax=0;
+		let ymin=this._yNum-1, ymax=0;
 		for(let i=0;i<posList.length;i++){
 			let x=posList[i].x;
 			let y=posList[i].y;
 			this._list[x][y]=StarType.NOTHING;
 			xmin=Math.min(xmin,x);
 			xmax=Math.max(xmax,x);
+			ymin=Math.min(ymin,y);
+			ymax=Math.max(ymax,y);
 		}
-		let ymin, ymax;
-		return cc.rect(xmin,ymin,xmax,ymax);
+		return cc.rect(xmin,ymin,xmax-xmin,ymax-ymin);
 	}
 
-	public drop(xmin:number,xmax:number):void{
-		for(let x=xmin;x<xmax;x++){
+	public drop(bounds:cc.Rect):void{
+		let xmin=bounds.xMin;
+		let xmax=bounds.xMax;
+		let ymin=bounds.yMin;
+		for(let x=xmin;x<=xmax;x++){
 			let emptyNum=0;
-			for(let y=0;y<this._yNum;y++){
+			for(let y=ymin;y<this._yNum;y++){
 				let value=this._list[x][y];
 				if(value==StarType.NOTHING){
                     emptyNum++;

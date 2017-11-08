@@ -4,20 +4,15 @@ import { StarsBoard } from "./StarsBoard";
 import { LevelData } from "./LevelData";
 
 @ccclass
-export class Map extends cc.Object {
-
+export class Map extends cc.Component {
+    @property(Game)
+    private game:Game=null;
+    @property(cc.Prefab)
+    private rStar:cc.Prefab=null;
     private _stars:StarsBoard;
-    private _game:Game;
 
-    public static create(game:Game):Map{
-        let map=new Map();
-        map.init(game);
-        return map;
-    }
-
-    private init(game:Game):void{
-        this._game=game;
-        let levelData=LevelData.getData(this._game.level);
+    public onLoad():void{
+        let levelData=LevelData.getData(this.game.level);
         this._stars=new StarsBoard();
         this._stars.init(10,10);
         this._stars.setWithData(levelData);
@@ -28,5 +23,10 @@ export class Map extends cc.Object {
         cc.log(this._stars.toString());
         this._stars.drop(bounds);
         cc.log(this._stars.toString());
+
+        let star=cc.instantiate(this.rStar);
+        star.parent=this.node;
+        star.active=true;
+        cc.log("onLoad map");
     }
 }

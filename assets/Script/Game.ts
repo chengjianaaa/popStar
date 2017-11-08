@@ -11,7 +11,9 @@ export class Game extends cc.Component {
     private gameBg:cc.Node=null;
     @property(cc.Node)
     private levelStartText:cc.Node=null;
-
+    @property(cc.Node)
+    private map:cc.Node=null;
+    
     private _level:number;
    
     public onLoad() {
@@ -39,7 +41,7 @@ export class Game extends cc.Component {
     }
     private layoutLevel():void{
         cc.log("layoutBlocks=======");
-        Map.create(this);
+        this.map.active=true;
     }
 
     public get level():number{return this._level;}

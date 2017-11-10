@@ -28,5 +28,6 @@ export class Map extends cc.Component {
         star.parent=this.node;
         star.active=true;
         cc.log("onLoad map");
+        
     }
 }

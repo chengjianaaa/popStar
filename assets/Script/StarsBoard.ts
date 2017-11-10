@@ -1,14 +1,6 @@
-const { ccclass, property } = cc._decorator;
-    
-export enum StarType{
-    NOTHING=0,
-    RED=1,
-    GREEN=2,
-    BLUE=3,
-    YELLOW=4,
-    PURPLE=5
-}
+import { StarType } from "./StarType";
 
+const { ccclass, property } = cc._decorator;
 @ccclass 
 export class StarsBoard extends cc.Object {
 	private _list:number[][];

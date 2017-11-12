@@ -146,7 +146,9 @@ export class StarsBoard extends cc.Object {
 		cc.log(str);
 	}
 
-
+	public get posList():number[][]{ return this._list; }
+	public get xNum():number{ return this._xNum; }
+	public get yNum():number{ return this._yNum; }
 	
 
 }

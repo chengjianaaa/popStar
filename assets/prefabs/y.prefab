@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "r",
+    "_name": "y",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -53,7 +53,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
+      "x": 226,
       "y": 0
     },
     "_skewX": 0,
@@ -72,7 +72,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "e2492453-01c8-4f32-a3d8-ac2102f76f8b"
+      "__uuid__": "63d8df79-7933-442f-9d55-ec4a879b01e2"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -104,9 +104,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "de07a9a1-9989-4922-88bc-a1318ed2aea4"
+      "__uuid__": "4d217ff7-ac04-48e1-952a-442e652ab60d"
     },
-    "fileId": "c05I9YNPhIsKs2IgF6ESUk",
+    "fileId": "10buLF7I5DQZ+ZIXOB45Qf",
     "sync": false
   }
 ]

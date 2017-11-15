@@ -38,8 +38,6 @@ export class Map extends cc.Component {
 		}
 		cc.log(this._stars.toString());
 		
-		
-		
 		let outList:cc.Vec2[]=[];
 		let bounds=this._stars.pop(5,3,outList);
 		//cc.log(outList);
@@ -60,7 +58,7 @@ export class Map extends cc.Component {
 		let star:cc.Node;
 		switch(type){
 			case StarType.NOTHING:
-				star=cc.instantiate(this.rStar);
+				//star=cc.instantiate(this.rStar);
 				break;
 			case StarType.RED:
 				star=cc.instantiate(this.rStar);

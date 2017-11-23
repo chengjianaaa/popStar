@@ -48,7 +48,7 @@
     "_globalZOrder": 0,
     "_opacityModifyRGB": false,
     "groupIndex": 0,
-    "autoReleaseAssets": false
+    "autoReleaseAssets": null
   },
   {
     "__type__": "cc.Node",
@@ -1461,8 +1461,8 @@
     },
     "cellSize": {
       "__type__": "cc.Vec2",
-      "x": 46,
-      "y": 46
+      "x": 48,
+      "y": 48
     }
   },
   {

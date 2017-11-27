@@ -18,6 +18,11 @@ export class Game extends cc.Component {
    
     public onLoad() {
         cc.log("=== start Game ===");
+        this.title.active=true;
+        this.gameBg.active=false;
+        this.levelStartText.active=false;
+        this.map.active=false;
+        
     }
     public gotoTitle():void{
         cc.log("gotoTitle");

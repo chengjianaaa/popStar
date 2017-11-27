@@ -37,11 +37,17 @@ export class StarsBoard extends cc.Object {
 	public getValue(x:number,y:number):number{
 		return this._list[x][y];
 	}
-
+	
+	/**
+	 * 消除
+	 * @param x 
+	 * @param y 
+	 * @param results 输出消除的位置
+	 */
 	public pop(x:number,y:number,results:cc.Vec2[]=null):cc.Rect{
 		if(!results)results=[];
 		this.findFill(x,y,results);
-		this.printPopResult(results,this.getValue(x,y));
+		//this.printPopResult(results,this.getValue(x,y));
 		let bounds:cc.Rect=this.deletePosList(results);
 		return bounds;
 	}
@@ -110,6 +116,12 @@ export class StarsBoard extends cc.Object {
 				}
 			}
 		}
+	}
+	
+	/**检测是否消除完毕*/
+	public checkPopEnd():Boolean{
+		
+		return false;
 	}
 
 	public toString():string{

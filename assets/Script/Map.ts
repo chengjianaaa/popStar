@@ -3,6 +3,7 @@ import { Game } from "./Game";
 import { StarsBoard } from "./StarsBoard";
 import { LevelData } from "./LevelData";
 import { StarType } from "./StarType";
+import { Star } from "./Star";
 
 @ccclass
 export class Map extends cc.Component {
@@ -20,63 +21,74 @@ export class Map extends cc.Component {
 	private yStar:cc.Prefab=null;
 	@property(cc.Vec2)
 	private cellSize:cc.Vec2=null;
-	private _stars:StarsBoard;
+	private _starsBoard:StarsBoard;
+	private _stars:Star[][];
 
 	public onLoad():void{
-		cc.log("gamelevel:",this.game.level);
-		let levelData=LevelData.getData(this.game.level);
-		this._stars=new StarsBoard();
-		this._stars.init(10,10);
-		this._stars.setWithData(levelData);
-		
-		let posList=this._stars.posList;
-		for(let x=0;x<this._stars.xNum;x++){
-			for(let y=0;y<this._stars.yNum;y++){
-				let starType=posList[x][y];
-				this.createStarWithType(starType,x,y);
-			}
-		}
-		cc.log(this._stars.toString());
-		
-		let outList:cc.Vec2[]=[];
-		let bounds=this._stars.pop(5,3,outList);
-		//cc.log(outList);
-		cc.log(this._stars.toString());
-		this._stars.drop(bounds);
-		cc.log(this._stars.toString());
-
-		let star=cc.instantiate(this.rStar);
-		star.parent=this.node;
-		star.active=true;
-		cc.log("onLoad map");
-		
+		this.initStarsBoard();
 	}
 	
-	private createStarWithType(type:StarType,ix:number,iy:number):void{
+	private initStarsBoard():void{
+		cc.log("gamelevel:",this.game.level);
+		let levelData=LevelData.getData(this.game.level);
+		this._starsBoard=new StarsBoard();
+		this._starsBoard.init(10,10);
+		this._starsBoard.setWithData(levelData);
+		
+		this._stars=[];
+		
+		let posList=this._starsBoard.posList;
+		for(let x=0;x<this._starsBoard.xNum;x++){
+			this._stars[x]=[];
+			for(let y=0;y<this._starsBoard.yNum;y++){
+				let starType=posList[x][y];
+				this._stars[x][y]=this.createStarWithType(starType,x,y);
+			}
+		}
+		cc.log(this._starsBoard.toString());
+	}
+	
+	private createStarWithType(type:StarType,ix:number,iy:number):Star{
 		let x=ix*this.cellSize.x;
 		let y=iy*this.cellSize.y;
-		let star:cc.Node;
+		let starNode:cc.Node;
 		switch(type){
 			case StarType.NOTHING:
 				//star=cc.instantiate(this.rStar);
 				break;
 			case StarType.RED:
-				star=cc.instantiate(this.rStar);
+				starNode=cc.instantiate(this.rStar);
 				break;
 			case StarType.GREEN:
-				star=cc.instantiate(this.gStar);
+				starNode=cc.instantiate(this.gStar);
 				break;
 			case StarType.BLUE:
-				star=cc.instantiate(this.bStar);
+				starNode=cc.instantiate(this.bStar);
 				break;
 			case StarType.PURPLE:
-				star=cc.instantiate(this.vStar);
+				starNode=cc.instantiate(this.vStar);
 				break;
 			case StarType.YELLOW:
-				star=cc.instantiate(this.yStar);
+				starNode=cc.instantiate(this.yStar);
 				break;
 		}
-		star.setPosition(x,y);
-		star.parent=this.node;
+		let star:Star=starNode.getComponent(Star) as Star;
+		star.init(this,x,y,ix,iy,type);
+		starNode.parent=this.node;
+		return star;
+	}
+	
+	public popAndDrop(ix:number,iy:number):void{
+		let popResults:cc.Vec2[]=[];
+		let resultsRect=this._starsBoard.pop(ix,iy,popResults);
+		for(let i=0;i<popResults.length;i++){
+			let posInt=popResults[i];
+			
+			let star=this._stars[posInt.x][posInt.y];
+			star.tweenDestroy();
+			this._stars[posInt.x][posInt.y]=null;
+		}
+		this._starsBoard.drop(resultsRect);
+		//cc.log(this._stars.toString());
 	}
 }

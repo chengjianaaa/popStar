@@ -1,6 +1,6 @@
 const {ccclass, property} = cc._decorator;
 import { Game } from "./Game";
-import { StarsBoard } from "./StarsBoard";
+import { StarsBoard, DropResult } from "./StarsBoard";
 import { LevelData } from "./LevelData";
 import { StarType } from "./StarType";
 import { Star } from "./Star";
@@ -88,7 +88,20 @@ export class Map extends cc.Component {
 			star.tweenDestroy();
 			this._stars[posInt.x][posInt.y]=null;
 		}
-		this._starsBoard.drop(resultsRect);
+		
+		let dropResults:DropResult[]=[];//输出需要掉落星星和它新位置
+		this._starsBoard.drop(resultsRect,dropResults);
 		//cc.log(this._stars.toString());
+		for(let i=0;i<dropResults.length;i++){
+			let dropResult=dropResults[i];
+			let star=this._stars[dropResult.pos.x][dropResult.pos.y];
+			this._stars[dropResult.pos.x][dropResult.pos.y]=null;
+			
+			star.setPosInt(dropResult.newPos.x,dropResult.newPos.y);
+			star.setPosition(dropResult.newPos.x*this.cellSize.x,dropResult.newPos.y*this.cellSize.y);
+			this._stars[dropResult.newPos.x][dropResult.newPos.y]=star;
+			
+		}
 	}
+	
 }

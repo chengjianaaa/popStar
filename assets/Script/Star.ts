@@ -33,6 +33,15 @@ export class Star extends cc.Component {
         this.node.off(cc.Node.EventType.TOUCH_END,this.onTouchEnd,this);
     }
     
+    public setPosInt(ix:number,iy:number):void{
+        this._posInt.x=ix;
+        this._posInt.y=iy;
+    }
+    
+    public setPosition(x:number,y:number):void{
+        this.node.setPosition(x,y);
+    }
+    
     public onDestroy():void{
         this._posInt=null;
         this._type=null;

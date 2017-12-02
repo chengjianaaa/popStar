@@ -100,7 +100,7 @@ export class StarsBoard extends cc.Object {
 		return cc.rect(xmin,ymin,xmax-xmin,ymax-ymin);
 	}
 
-	public drop(bounds:cc.Rect):void{
+	public drop(bounds:cc.Rect,dropResults?:DropResult[]):void{
 		let xmin=bounds.xMin;
 		let xmax=bounds.xMax;
 		let ymin=bounds.yMin;
@@ -111,8 +111,14 @@ export class StarsBoard extends cc.Object {
 				if(value==StarType.NOTHING){
                     emptyNum++;
 				}else{
+					let newY=y-emptyNum;
 					this._list[x][y]=StarType.NOTHING;
-					this._list[x][y-emptyNum]=value;
+					this._list[x][newY]=value;
+					if(y!=newY){
+						if(dropResults){
+							dropResults.push(new DropResult(x,y,x,newY));
+						}
+					}
 				}
 			}
 		}
@@ -163,4 +169,14 @@ export class StarsBoard extends cc.Object {
 	public get yNum():number{ return this._yNum; }
 	
 
+}
+
+export class DropResult extends cc.Object{
+	public pos:cc.Vec2;
+	public newPos:cc.Vec2;
+	public constructor(x:number,y:number,newX:number,newY:number){
+		super();
+		this.pos=cc.p(x,y);
+		this.newPos=cc.p(newX,newY);
+	}
 }

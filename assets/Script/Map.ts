@@ -80,27 +80,29 @@ export class Map extends cc.Component {
 	
 	public popAndDrop(ix:number,iy:number):void{
 		let popResults:cc.Vec2[]=[];
-		let resultsRect=this._starsBoard.pop(ix,iy,popResults);
-		for(let i=0;i<popResults.length;i++){
-			let posInt=popResults[i];
+		let resultsRect=this._starsBoard.pop(ix,iy,2,popResults);
+		if(resultsRect!=null){//有输出范围代表输出的结果大于最小可消除数
+			for(let i=0;i<popResults.length;i++){
+				let posInt=popResults[i];
+				
+				let star=this._stars[posInt.x][posInt.y];
+				star.tweenDestroy();
+				this._stars[posInt.x][posInt.y]=null;
+			}
 			
-			let star=this._stars[posInt.x][posInt.y];
-			star.tweenDestroy();
-			this._stars[posInt.x][posInt.y]=null;
-		}
-		
-		let dropResults:DropResult[]=[];//输出需要掉落星星和它新位置
-		this._starsBoard.drop(resultsRect,dropResults);
-		//cc.log(this._stars.toString());
-		for(let i=0;i<dropResults.length;i++){
-			let dropResult=dropResults[i];
-			let star=this._stars[dropResult.pos.x][dropResult.pos.y];
-			this._stars[dropResult.pos.x][dropResult.pos.y]=null;
-			
-			star.setPosInt(dropResult.newPos.x,dropResult.newPos.y);
-			star.setPosition(dropResult.newPos.x*this.cellSize.x,dropResult.newPos.y*this.cellSize.y);
-			this._stars[dropResult.newPos.x][dropResult.newPos.y]=star;
-			
+			let dropResults:DropResult[]=[];//输出需要掉落星星和它新位置
+			this._starsBoard.drop(resultsRect,dropResults);
+			//cc.log(this._stars.toString());
+			for(let i=0;i<dropResults.length;i++){
+				let dropResult=dropResults[i];
+				let star=this._stars[dropResult.pos.x][dropResult.pos.y];
+				this._stars[dropResult.pos.x][dropResult.pos.y]=null;
+				
+				star.setPosInt(dropResult.newPos.x,dropResult.newPos.y);
+				star.setPosition(dropResult.newPos.x*this.cellSize.x,dropResult.newPos.y*this.cellSize.y);
+				this._stars[dropResult.newPos.x][dropResult.newPos.y]=star;
+				
+			}
 		}
 	}
 	

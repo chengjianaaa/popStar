@@ -80,7 +80,8 @@ export class Map extends cc.Component {
 	
 	public popAndDrop(ix:number,iy:number):void{
 		let popResults:cc.Vec2[]=[];
-		let resultsRect=this._starsBoard.pop(ix,iy,2,popResults);
+		let popMinNum:number=2;//最小能消除的数量
+		let resultsRect=this._starsBoard.pop(ix,iy,popMinNum,popResults);
 		if(resultsRect!=null){//有输出范围代表输出的结果大于最小可消除数
 			for(let i=0;i<popResults.length;i++){
 				let posInt=popResults[i];

@@ -42,15 +42,15 @@ export class StarsBoard extends cc.Object {
 	 * 消除
 	 * @param x 
 	 * @param y 
-	 * @param popMinCount 最小能消除的个数
+	 * @param popMinNum 最小能消除的个数
 	 * @param results 输出消除的位置
-	 * @return 返回消除的范围，小于popMinCount时，返回null
+	 * @return 返回消除的范围，小于popMinNum时，返回null
 	 */
-	public pop(x:number,y:number,popMinCount:number,results:cc.Vec2[]=null):cc.Rect{
+	public pop(x:number,y:number,popMinNum:number,results:cc.Vec2[]=null):cc.Rect{
 		if(!results)results=[];
 		this.findFill(x,y,results);
 		//this.printPopResult(results,this.getValue(x,y));
-		if(results.length>=popMinCount){
+		if(results.length>=popMinNum){
 			let bounds:cc.Rect=this.deletePosList(results);
 			return bounds;
 		}

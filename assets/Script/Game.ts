@@ -34,6 +34,7 @@ export class Game extends cc.Component {
     }
     public win():void{
         cc.log("win");
+        let graphics=this.addComponent(cc.Graphics);
     }
     public faiure():void{
         cc.log("faiure");

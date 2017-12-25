@@ -30,7 +30,8 @@ export class Map extends cc.Component {
 	
 	private initStarsBoard():void{
 		cc.log("gamelevel:",this.game.level);
-		let levelData=LevelData.getData(this.game.level);
+		//let levelData=LevelData.getData(this.game.level);
+		let levelData=LevelData.getRandomData();
 		this._starsBoard=new StarsBoard();
 		this._starsBoard.init(10,10);
 		this._starsBoard.setWithData(levelData);

@@ -129,10 +129,25 @@ export class StarsBoard extends cc.Object {
 		}
 	}
 	
-	/**检测是否消除完毕*/
-	public checkPopEnd():Boolean{
+	/**左移空列*/
+	public moveToLeft():void{
 		
-		return false;
+	}
+	
+	/**检测是否消除完毕*/
+	public checkPopEnd():boolean{
+		let result=true;
+		for(let x=0;x<this._xNum;x++){
+			for(let y=1;y<this._yNum;y++){
+				let pre=this._list[x][y-1];
+				let current=this._list[x][y];
+				if(pre==current&&pre!=StarType.NOTHING){
+					result=false;
+					break;
+				}
+			}
+		}
+		return result;
 	}
 
 	public toString():string{

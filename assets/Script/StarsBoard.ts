@@ -105,7 +105,8 @@ export class StarsBoard extends cc.Object {
 		return cc.rect(xmin,ymin,xmax-xmin,ymax-ymin);
 	}
 
-	public drop(bounds:cc.Rect,dropResults?:DropResult[]):void{
+	public drop(bounds:cc.Rect,outResults?:ChangeResult[]):ChangeResult[]{
+		if(!outResults)outResults=[];
 		let xmin=bounds.xMin;
 		let xmax=bounds.xMax;
 		let ymin=bounds.yMin;
@@ -120,18 +121,25 @@ export class StarsBoard extends cc.Object {
 					this._list[x][y]=StarType.NOTHING;
 					this._list[x][newY]=value;
 					if(y!=newY){
-						if(dropResults){
-							dropResults.push(new DropResult(x,y,x,newY));
+						if(outResults){
+							outResults.push(new ChangeResult(x,y,x,newY));
 						}
 					}
 				}
 			}
 		}
+		return outResults;
 	}
 	
 	/**左移空列*/
-	public moveToLeft():void{
-		
+	public moveToLeft(bounds:cc.Rect,outResults?:ChangeResult[]):ChangeResult[]{
+		if(!outResults)outResults=[];
+		let xmin=bounds.xMin;
+		let xmax=bounds.xMax;
+		for(let x=xmin;x<=xmax;x++){
+			
+		}
+		return outResults;
 	}
 	
 	/**检测是否消除完毕*/
@@ -191,7 +199,8 @@ export class StarsBoard extends cc.Object {
 
 }
 
-export class DropResult extends cc.Object{
+/**变更的结果*/
+export class ChangeResult extends cc.Object{
 	public pos:cc.Vec2;
 	public newPos:cc.Vec2;
 	public constructor(x:number,y:number,newX:number,newY:number){

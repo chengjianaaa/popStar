@@ -1,6 +1,6 @@
 const {ccclass, property} = cc._decorator;
 import { Game } from "./Game";
-import { StarsBoard, DropResult } from "./StarsBoard";
+import { StarsBoard, ChangeResult } from "./StarsBoard";
 import { LevelData } from "./LevelData";
 import { StarType } from "./StarType";
 import { Star } from "./Star";
@@ -82,8 +82,9 @@ export class Map extends cc.Component {
 	public popAndDrop(ix:number,iy:number):void{
 		let popResults:cc.Vec2[]=[];
 		let popMinNum:number=2;//最小能消除的数量
-		let resultsRect=this._starsBoard.pop(ix,iy,popMinNum,popResults);
-		if(resultsRect!=null){//有输出范围代表输出的结果大于最小可消除数
+		//1.消除
+		let popResultsRect=this._starsBoard.pop(ix,iy,popMinNum,popResults);
+		if(popResultsRect!=null){//有输出范围代表输出的结果大于最小可消除数
 			for(let i=0;i<popResults.length;i++){
 				let posInt=popResults[i];
 				
@@ -91,9 +92,8 @@ export class Map extends cc.Component {
 				star.tweenDestroy();
 				this._stars[posInt.x][posInt.y]=null;
 			}
-			
-			let dropResults:DropResult[]=[];//输出需要掉落星星和它新位置
-			this._starsBoard.drop(resultsRect,dropResults);
+			//2.下落
+			let dropResults:ChangeResult[]=this._starsBoard.drop(popResultsRect);//输出需要掉落星星和它新位置
 			//cc.log(this._stars.toString());
 			for(let i=0;i<dropResults.length;i++){
 				let dropResult=dropResults[i];
@@ -103,8 +103,9 @@ export class Map extends cc.Component {
 				star.setPosInt(dropResult.newPos.x,dropResult.newPos.y);
 				star.setPosition(dropResult.newPos.x*this.cellSize.x,dropResult.newPos.y*this.cellSize.y);
 				this._stars[dropResult.newPos.x][dropResult.newPos.y]=star;
-				
 			}
+			//3.左移
+			let moveToLeftResult:ChangeResult[]=this._starsBoard.moveToLeft(popResultsRect);//输出需要左移星星和它新位置
 		}
 	}
 	

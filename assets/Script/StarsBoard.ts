@@ -96,7 +96,7 @@ export class StarsBoard extends cc.Object {
 		for(let i=0;i<posList.length;i++){
 			let x=posList[i].x;
 			let y=posList[i].y;
-			this._list[x][y]=StarType.NOTHING;
+			this.setEmptyWithXY(x,y);
 			xmin=Math.min(xmin,x);
 			xmax=Math.max(xmax,x);
 			ymin=Math.min(ymin,y);
@@ -118,8 +118,8 @@ export class StarsBoard extends cc.Object {
                     emptyNum++;
 				}else{
 					let newY=y-emptyNum;
-					this._list[x][y]=StarType.NOTHING;
-					this._list[x][newY]=value;
+					this.setEmptyWithXY(x,y);
+                    this.setValue(x,newY,value);
 					if(y!=newY){
 						if(outResults){
 							outResults.push(new ChangeResult(x,y,x,newY));
@@ -135,9 +135,22 @@ export class StarsBoard extends cc.Object {
 	public moveToLeft(bounds:cc.Rect,outResults?:ChangeResult[]):ChangeResult[]{
 		if(!outResults)outResults=[];
 		let xmin=bounds.xMin;
-		let xmax=bounds.xMax;
-		for(let x=xmin;x<=xmax;x++){
-			
+		//let xmax=bounds.xMax;
+        
+        let emptyCount=0;
+		for(let x=xmin;x<this._xNum;x++){
+            let isEmptyCol=true;
+            for(let y=0;y<this._yNum;y++){
+                if(!this.isEmptyXY(x,y)) isEmptyCol=false;
+                if(emptyCount>0){
+                    let newX=x-emptyCount;
+                    let value=this._list[x][y];
+                    this.setEmptyWithXY(x,y);
+                    this.setValue(newX,y,value);
+                    outResults.push(new ChangeResult(x,y,newX,y));
+                }
+            }
+            if(isEmptyCol) emptyCount++;
 		}
 		return outResults;
 	}
@@ -149,7 +162,7 @@ export class StarsBoard extends cc.Object {
 			for(let y=1;y<this._yNum;y++){
 				let pre=this._list[x][y-1];
 				let current=this._list[x][y];
-				if(pre==current&&pre!=StarType.NOTHING){
+				if(pre==current&&!this.isEmptyXY(x,y-1)){
 					result=false;
 					break;
 				}
@@ -157,6 +170,24 @@ export class StarsBoard extends cc.Object {
 		}
 		return result;
 	}
+    
+    private isEmptyXY(x:number,y:number):boolean{
+        return this._list[x][y]==StarType.NOTHING;
+    }
+    private setEmptyWithXY(x:number,y:number):void{
+        this._list[x][y]=StarType.NOTHING;
+    }
+    
+    private isEmptyColumn(x:number):boolean{
+        let isEmpty:boolean=true;
+        for(let y=0;y<this._yNum;y++){
+            if(!this.isEmptyXY(x,y)){
+                isEmpty=false;
+                break;
+            }
+        }
+        return isEmpty;
+    }
 
 	public toString():string{
 		let str="";

@@ -105,7 +105,16 @@ export class Map extends cc.Component {
 				this._stars[dropResult.newPos.x][dropResult.newPos.y]=star;
 			}
 			//3.左移
-			let moveToLeftResult:ChangeResult[]=this._starsBoard.moveToLeft(popResultsRect);//输出需要左移星星和它新位置
+			let moveToLeftResults:ChangeResult[]=this._starsBoard.moveToLeft(popResultsRect);//输出需要左移星星和它新位置
+            for(let i=0;i<moveToLeftResults.length;i++){
+                let moveTopLeftResult=moveToLeftResults[i];
+                let star=this._stars[moveTopLeftResult.pos.x][moveTopLeftResult.pos.y];
+                this._stars[moveTopLeftResult.pos.x][moveTopLeftResult.pos.y]=null;
+                
+                star.setPosInt(moveTopLeftResult.newPos.x,moveTopLeftResult.newPos.y);
+                star.setPosition(moveTopLeftResult.newPos.x*this.cellSize.x,moveTopLeftResult.newPos.y*this.cellSize.y);
+				this._stars[moveTopLeftResult.newPos.x][moveTopLeftResult.newPos.y]=star;
+            }
 		}
 	}
 	

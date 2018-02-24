@@ -37,7 +37,7 @@ export class Game extends cc.Component {
         let graphics=this.addComponent(cc.Graphics);
     }
     public faiure():void{
-        cc.log("faiure");
+		cc.log("faiure");
     }
     public gotoLevel(level:number):void{
         cc.log("gotoLevel:",level);

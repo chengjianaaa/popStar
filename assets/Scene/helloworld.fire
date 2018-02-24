@@ -468,8 +468,6 @@
     },
     "duration": 0.1,
     "zoomScale": 1.2,
-    "pressedSprite": null,
-    "hoverSprite": null,
     "clickEvents": [
       {
         "__id__": 12
@@ -492,6 +490,10 @@
       "a": 255
     },
     "_N$normalSprite": null,
+    "_N$pressedSprite": null,
+    "pressedSprite": null,
+    "_N$hoverSprite": null,
+    "hoverSprite": null,
     "_N$disabledSprite": null,
     "_N$target": {
       "__id__": 9
@@ -515,11 +517,7 @@
     },
     "_enabled": true,
     "_defaultClip": null,
-    "_clips": [
-      {
-        "__uuid__": "1019e0e3-129c-4e5f-9ba1-8336cefb15f4"
-      }
-    ],
+    "_clips": [],
     "playOnLoad": false
   },
   {
@@ -790,11 +788,7 @@
     },
     "_enabled": true,
     "_defaultClip": null,
-    "_clips": [
-      {
-        "__uuid__": "e2122b90-f632-4174-b3bb-eb910d504240"
-      }
-    ],
+    "_clips": [],
     "playOnLoad": false
   },
   {

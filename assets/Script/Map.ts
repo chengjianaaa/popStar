@@ -30,8 +30,8 @@ export class Map extends cc.Component {
 	
 	private initStarsBoard():void{
 		cc.log("gamelevel:",this.game.level);
-		//let levelData=LevelData.getData(this.game.level);
-		let levelData=LevelData.getRandomData();
+		let levelData=LevelData.getData(this.game.level);
+		//let levelData=LevelData.getRandomData();
 		this._starsBoard=new StarsBoard();
 		this._starsBoard.init(10,10);
 		this._starsBoard.setWithData(levelData);
@@ -94,18 +94,24 @@ export class Map extends cc.Component {
 			}
 			//2.下落
 			let dropResults:ChangeResult[]=this._starsBoard.drop(popResultsRect);//输出需要掉落星星和它新位置
-			//cc.log(this._stars.toString());
-			for(let i=0;i<dropResults.length;i++){
-				let dropResult=dropResults[i];
-				let star=this._stars[dropResult.pos.x][dropResult.pos.y];
-				this._stars[dropResult.pos.x][dropResult.pos.y]=null;
-				
-				star.setPosInt(dropResult.newPos.x,dropResult.newPos.y);
-				star.setPosition(dropResult.newPos.x*this.cellSize.x,dropResult.newPos.y*this.cellSize.y);
-				this._stars[dropResult.newPos.x][dropResult.newPos.y]=star;
-			}
+			this.changeStarsWithResults(dropResults);
+			cc.log(this._starsBoard.toString());
 			//3.左移
-			let moveToLeftResult:ChangeResult[]=this._starsBoard.moveToLeft(popResultsRect);//输出需要左移星星和它新位置
+			let moveToLeftResults:ChangeResult[]=this._starsBoard.moveToLeft(popResultsRect);//输出需要左移星星和它新位置
+			this.changeStarsWithResults(moveToLeftResults);
+			cc.log(this._starsBoard.toString());
+		}
+	}
+	
+	public changeStarsWithResults(results:ChangeResult[]):void{
+		for(let i=0;i<results.length;i++){
+			let result=results[i];
+			let star=this._stars[result.pos.x][result.pos.y];
+			this._stars[result.pos.x][result.pos.y]=null;
+			
+			star.setPosInt(result.newPos.x,result.newPos.y);
+			star.setPosition(result.newPos.x*this.cellSize.x,result.newPos.y*this.cellSize.y);
+			this._stars[result.newPos.x][result.newPos.y]=star;
 		}
 	}
 	

@@ -108,10 +108,11 @@ export class Map extends cc.Component {
 			let result=results[i];
 			let star=this._stars[result.pos.x][result.pos.y];
 			this._stars[result.pos.x][result.pos.y]=null;
-			
-			star.setPosInt(result.newPos.x,result.newPos.y);
-			star.setPosition(result.newPos.x*this.cellSize.x,result.newPos.y*this.cellSize.y);
-			this._stars[result.newPos.x][result.newPos.y]=star;
+			if(star){
+				star.setPosInt(result.newPos.x,result.newPos.y);
+				star.setPosition(result.newPos.x*this.cellSize.x,result.newPos.y*this.cellSize.y);
+				this._stars[result.newPos.x][result.newPos.y]=star;
+			}
 		}
 	}
 	

@@ -156,7 +156,7 @@ export class StarsBoard extends cc.Object {
 	}
 	
 	/**检测是否消除完毕*/
-	public checkPopEnd():boolean{
+	public isPopEnd():boolean{
 		let result=true;
 		for(let x=0;x<this._xNum;x++){
 			for(let y=1;y<this._yNum;y++){

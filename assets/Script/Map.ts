@@ -103,6 +103,10 @@ export class Map extends cc.Component {
 		}
 	}
 	
+	public isPopEnd():boolean{
+		return this._starsBoard.isPopEnd();
+	}
+	
 	public changeStarsWithResults(results:ChangeResult[]):void{
 		for(let i=0;i<results.length;i++){
 			let result=results[i];

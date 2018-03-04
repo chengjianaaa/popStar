@@ -1,9 +1,10 @@
+import { MyGame } from "./MyGame";
+
 const {ccclass, property} = cc._decorator;
-import {Game} from"./Game";
 @ccclass
 export class Title extends cc.Component {
-    @property(Game)
-    public game:Game=null;
+    @property(MyGame)
+    public game:MyGame=null;
 
     protected onLoad() {
         cc.log("===title on load");

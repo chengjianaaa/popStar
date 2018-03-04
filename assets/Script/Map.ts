@@ -1,14 +1,14 @@
 const {ccclass, property} = cc._decorator;
-import { Game } from "./Game";
 import { StarsBoard, ChangeResult } from "./StarsBoard";
 import { LevelData } from "./LevelData";
 import { StarType } from "./StarType";
 import { Star } from "./Star";
+import { MyGame } from "./MyGame";
 
 @ccclass
 export class Map extends cc.Component {
-	@property(Game)
-	private game:Game=null;
+	@property(MyGame)
+	private game:MyGame=null;
 	@property(cc.Prefab)
 	private rStar:cc.Prefab=null;
 	@property(cc.Prefab)
@@ -30,8 +30,8 @@ export class Map extends cc.Component {
 	
 	private initStarsBoard():void{
 		cc.log("gamelevel:",this.game.level);
-		let levelData=LevelData.getData(this.game.level);
-		//let levelData=LevelData.getRandomData();
+		//let levelData=LevelData.getData(this.game.level);
+		let levelData=LevelData.getRandomData();
 		this._starsBoard=new StarsBoard();
 		this._starsBoard.init(10,10);
 		this._starsBoard.setWithData(levelData);

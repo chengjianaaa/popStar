@@ -1,8 +1,9 @@
 const {ccclass, property} = cc._decorator;
 import {LevelStartText} from "./LevelStartText";
 import{Map}from"./Map";
+import { LevelData } from "./LevelData";
 @ccclass 
-export class Game extends cc.Component {
+export class MyGame extends cc.Component {
     @property(cc.Node)
     private canvas:cc.Node=null;
     @property(cc.Node)
@@ -13,6 +14,8 @@ export class Game extends cc.Component {
     private levelStartText:cc.Node=null;
     @property(cc.Node)
     private map:cc.Node=null;
+    @property(cc.Node)
+    private messageUI:cc.Node=null;
     
     private _level:number;
    
@@ -24,6 +27,8 @@ export class Game extends cc.Component {
         this.gameBg.active=false;
         this.levelStartText.active=false;
         this.map.active=false;
+        this.messageUI.active=false;
+        
     }
     public gotoTitle():void{
         cc.log("gotoTitle");
@@ -39,12 +44,27 @@ export class Game extends cc.Component {
     public faiure():void{
 		cc.log("faiure");
     }
+    
+    public update(dt:number):void{
+        
+    }
+    
     public gotoLevel(level:number):void{
-        cc.log("gotoLevel:",level);
+        cc.log("gotoLevel");
         this._level=level;
+        //吊销标题界面
+        this.title.active=false;
+        //游戏背景图
         this.gameBg.active=true;
+        //信息面板
+        this.messageUI.active=true;
+        //进入关卡前显示的目标分动画
         this.levelStartText.active=true;
-        this.levelStartText.getComponent(LevelStartText).setOnCompleteCallback(this.layoutLevel,this);
+        let levelStartTextScript=this.levelStartText.getComponent(LevelStartText);
+        levelStartTextScript.setData(level,LevelData.getTargetScore(level));
+        levelStartTextScript.setOnCompleteCallback(this.layoutLevel,this);
+        
+        
     }
     private layoutLevel():void{
         cc.log("layoutBlocks=======");

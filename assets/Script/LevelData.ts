@@ -20,6 +20,18 @@ export class LevelData extends cc.Object{
         return list;
     }
     
+    public static getTargetScore (level:number):number{
+		let targetScore:number;
+        if(level>=19){
+            targetScore = 47000+4000*(level-18);
+        }else if(level>=7 && level<=18){
+            targetScore = 11000+3000*(level-6);
+        }else{
+            targetScore = 1000+2000*(level-1);
+        }
+        return targetScore;
+	}
+    
     public static getData(level:number):number[]{
         //cc.log(level);
         return LevelData["level_"+level]();

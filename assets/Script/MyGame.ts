@@ -57,6 +57,7 @@ export class MyGame extends cc.Component {
         //游戏背景图
         this.gameBg.active=true;
         //信息面板
+        cc.log(this.isValid);
         this.messageUI.active=true;
         //进入关卡前显示的目标分动画
         this.levelStartText.active=true;

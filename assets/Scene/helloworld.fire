@@ -125,7 +125,7 @@
     "map": {
       "__id__": 25
     },
-    "messageUINode": {
+    "messageUI": {
       "__id__": 27
     }
   },
@@ -670,7 +670,7 @@
     "map": {
       "__id__": 25
     },
-    "messageUINode": null
+    "messageUI": null
   },
   {
     "__type__": "cc.Node",

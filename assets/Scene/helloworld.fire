@@ -120,10 +120,10 @@
       "__id__": 5
     },
     "levelStartText": {
-      "__id__": 19
+      "__id__": 18
     },
     "map": {
-      "__id__": 25
+      "__id__": 24
     },
     "messageUI": {
       "__id__": 27
@@ -144,10 +144,10 @@
         "__id__": 8
       },
       {
-        "__id__": 19
+        "__id__": 18
       },
       {
-        "__id__": 25
+        "__id__": 24
       },
       {
         "__id__": 27
@@ -157,7 +157,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 31
+        "__id__": 34
       }
     ],
     "_prefab": null,
@@ -644,33 +644,8 @@
     },
     "_enabled": true,
     "game": {
-      "__id__": 18
+      "__id__": 3
     }
-  },
-  {
-    "__type__": "e3848TrAGlOwInAH1yNRnha",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 2
-    },
-    "_enabled": true,
-    "canvas": {
-      "__id__": 4
-    },
-    "title": {
-      "__id__": 8
-    },
-    "gameBg": {
-      "__id__": 5
-    },
-    "levelStartText": {
-      "__id__": 19
-    },
-    "map": {
-      "__id__": 25
-    },
-    "messageUI": null
   },
   {
     "__type__": "cc.Node",
@@ -681,17 +656,17 @@
     },
     "_children": [
       {
-        "__id__": 20
+        "__id__": 19
       },
       {
-        "__id__": 22
+        "__id__": 21
       }
     ],
     "_tag": -1,
     "_active": false,
     "_components": [
       {
-        "__id__": 24
+        "__id__": 23
       }
     ],
     "_prefab": null,
@@ -736,14 +711,14 @@
     "_name": "levelNum",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 19
+      "__id__": 18
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 21
+        "__id__": 20
       }
     ],
     "_prefab": null,
@@ -788,7 +763,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 20
+      "__id__": 19
     },
     "_enabled": true,
     "_useOriginalSize": false,
@@ -812,14 +787,14 @@
     "_name": "targetScore",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 19
+      "__id__": 18
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 23
+        "__id__": 22
       }
     ],
     "_prefab": null,
@@ -864,7 +839,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 22
+      "__id__": 21
     },
     "_enabled": true,
     "_useOriginalSize": false,
@@ -888,14 +863,14 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 19
+      "__id__": 18
     },
     "_enabled": true,
     "levelNum": {
-      "__id__": 20
+      "__id__": 19
     },
     "targetScore": {
-      "__id__": 22
+      "__id__": 21
     }
   },
   {
@@ -910,7 +885,7 @@
     "_active": false,
     "_components": [
       {
-        "__id__": 26
+        "__id__": 25
       }
     ],
     "_prefab": null,
@@ -955,11 +930,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 25
+      "__id__": 24
     },
     "_enabled": true,
     "game": {
-      "__id__": 18
+      "__id__": 26
     },
     "rStar": {
       "__uuid__": "de07a9a1-9989-4922-88bc-a1318ed2aea4"
@@ -983,6 +958,31 @@
     }
   },
   {
+    "__type__": "e3848TrAGlOwInAH1yNRnha",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "canvas": {
+      "__id__": 4
+    },
+    "title": {
+      "__id__": 8
+    },
+    "gameBg": {
+      "__id__": 5
+    },
+    "levelStartText": {
+      "__id__": 18
+    },
+    "map": {
+      "__id__": 24
+    },
+    "messageUI": null
+  },
+  {
     "__type__": "cc.Node",
     "_name": "messageUI",
     "_objFlags": 0,
@@ -992,11 +992,18 @@
     "_children": [
       {
         "__id__": 28
+      },
+      {
+        "__id__": 31
       }
     ],
     "_tag": -1,
-    "_active": false,
-    "_components": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 33
+      }
+    ],
     "_prefab": null,
     "_id": "87zfc44KdBhYUFgkWA/uNF",
     "_opacity": 255,
@@ -1142,6 +1149,97 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 452,
     "_originalHeight": 0
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "scoreLabel",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 27
+    },
+    "_children": [],
+    "_tag": -1,
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 32
+      }
+    ],
+    "_prefab": null,
+    "_id": "46ng8lbapEKaAd2xs3rHyk",
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 83.13,
+      "height": 35
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 32,
+      "y": 352
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
+    "groupIndex": 0
+  },
+  {
+    "__type__": "cc.Label",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 31
+    },
+    "_enabled": true,
+    "_useOriginalSize": false,
+    "_actualFontSize": 35,
+    "_fontSize": 35,
+    "_lineHeight": 35,
+    "_enableWrapText": true,
+    "_N$file": {
+      "__uuid__": "cf6c52f9-edaa-477c-9afe-0cf7a3f6fdfd"
+    },
+    "_isSystemFontUsed": false,
+    "_spacingX": 0,
+    "_N$string": "1000",
+    "_N$horizontalAlign": 1,
+    "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 0
+  },
+  {
+    "__type__": "0698bMo4PhLjJOs46JjADnT",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 27
+    },
+    "_enabled": true,
+    "game": {
+      "__id__": 2
+    },
+    "scoreLabel": {
+      "__id__": 32
+    }
   },
   {
     "__type__": "cc.Canvas",

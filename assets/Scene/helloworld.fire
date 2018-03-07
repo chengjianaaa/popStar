@@ -126,7 +126,7 @@
       "__id__": 24
     },
     "messageUI": {
-      "__id__": 27
+      "__id__": 26
     }
   },
   {
@@ -150,14 +150,14 @@
         "__id__": 24
       },
       {
-        "__id__": 27
+        "__id__": 26
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 34
+        "__id__": 33
       }
     ],
     "_prefab": null,
@@ -934,7 +934,7 @@
     },
     "_enabled": true,
     "game": {
-      "__id__": 26
+      "__id__": 3
     },
     "rStar": {
       "__uuid__": "de07a9a1-9989-4922-88bc-a1318ed2aea4"
@@ -958,31 +958,6 @@
     }
   },
   {
-    "__type__": "e3848TrAGlOwInAH1yNRnha",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 2
-    },
-    "_enabled": true,
-    "canvas": {
-      "__id__": 4
-    },
-    "title": {
-      "__id__": 8
-    },
-    "gameBg": {
-      "__id__": 5
-    },
-    "levelStartText": {
-      "__id__": 18
-    },
-    "map": {
-      "__id__": 24
-    },
-    "messageUI": null
-  },
-  {
     "__type__": "cc.Node",
     "_name": "messageUI",
     "_objFlags": 0,
@@ -991,17 +966,17 @@
     },
     "_children": [
       {
-        "__id__": 28
+        "__id__": 27
       },
       {
-        "__id__": 31
+        "__id__": 30
       }
     ],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
-        "__id__": 33
+        "__id__": 32
       }
     ],
     "_prefab": null,
@@ -1046,17 +1021,17 @@
     "_name": "messageUI_bg",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 27
+      "__id__": 26
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 29
+        "__id__": 28
       },
       {
-        "__id__": 30
+        "__id__": 29
       }
     ],
     "_prefab": null,
@@ -1101,7 +1076,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 28
+      "__id__": 27
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -1127,7 +1102,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 28
+      "__id__": 27
     },
     "_enabled": true,
     "isAlignOnce": true,
@@ -1155,14 +1130,14 @@
     "_name": "scoreLabel",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 27
+      "__id__": 26
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 32
+        "__id__": 31
       }
     ],
     "_prefab": null,
@@ -1207,7 +1182,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 31
+      "__id__": 30
     },
     "_enabled": true,
     "_useOriginalSize": false,
@@ -1231,14 +1206,14 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 27
+      "__id__": 26
     },
     "_enabled": true,
     "game": {
       "__id__": 2
     },
     "scoreLabel": {
-      "__id__": 32
+      "__id__": 31
     }
   },
   {

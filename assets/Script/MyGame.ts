@@ -2,6 +2,8 @@ const {ccclass, property} = cc._decorator;
 import {LevelStartText} from "./LevelStartText";
 import{Map}from"./Map";
 import { LevelData } from "./LevelData";
+import { LocalManager } from "./LocalManager";
+import { MessageUI } from "./MessageUI";
 @ccclass 
 export class MyGame extends cc.Component {
     @property(cc.Node)
@@ -18,9 +20,11 @@ export class MyGame extends cc.Component {
     private messageUI:cc.Node=null;
     
     private _level:number;
+    private _score:number;
    
     public onLoad() {
         cc.log("=== start Game ===");
+        this._score=this.getScoreWithLocal();
         cc.director.setDisplayStats(false);
         
         this.title.active=true;
@@ -29,7 +33,17 @@ export class MyGame extends cc.Component {
         this.map.active=false;
         this.messageUI.active=false;
         
+        LocalManager.removeItem("score");
+        cc.log(this._score);
     }
+    
+    private getScoreWithLocal():number{
+        return LocalManager.getInt("score");
+    }
+    private saveScoreToLocal():void{
+        LocalManager.setInt("score",this._score);
+    }
+    
     public gotoTitle():void{
         cc.log("gotoTitle");
         this.title.active=true;
@@ -74,8 +88,21 @@ export class MyGame extends cc.Component {
         this.map.setPosition(bottomLeft);
         this.map.active=true;
     }
+    
+    public getComputeScoreWithCount(popCount:number):number{
+        return (popCount-1)*10+5;
+    }
+    public addScore(value:number):void{
+        this.setScore(this._score=value);
+    }
+    public setScore(value:number):void{
+        this._score=value;
+        let messageUIScript=this.messageUI.getComponent(MessageUI);
+        messageUIScript.setScoreLabelText(this._score.toString());
+    }
 
     public get level():number{return this._level;}
+    public get score():number{return this._score;}
 
 
 }

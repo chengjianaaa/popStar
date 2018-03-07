@@ -85,7 +85,12 @@ export class Map extends cc.Component {
 		//1.消除
 		let popResultsRect=this._starsBoard.pop(ix,iy,popMinNum,popResults);
 		if(popResultsRect!=null){//有输出范围代表输出的结果大于最小可消除数
-			for(let i=0;i<popResults.length;i++){
+            //计算消除得分
+            let popCount=popResults.length;
+            let score=this.game.getComputeScoreWithCount(popCount);
+            this.game.addScore(score);
+            
+			for(let i=0;i<popCount;i++){
 				let posInt=popResults[i];
 				
 				let star=this._stars[posInt.x][posInt.y];
@@ -96,6 +101,7 @@ export class Map extends cc.Component {
 			let dropResults:ChangeResult[]=this._starsBoard.drop(popResultsRect);//输出需要掉落星星和它新位置
 			this.changeStarsWithResults(dropResults);
 			cc.log(this._starsBoard.toString());
+            
 			//3.左移
 			let moveToLeftResults:ChangeResult[]=this._starsBoard.moveToLeft(popResultsRect);//输出需要左移星星和它新位置
 			this.changeStarsWithResults(moveToLeftResults);
@@ -119,5 +125,6 @@ export class Map extends cc.Component {
 			}
 		}
 	}
+    
 	
 }

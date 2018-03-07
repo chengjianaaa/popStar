@@ -11,4 +11,8 @@ export class MessageUI extends cc.Component {
     public onLoad():void{
         
     }
+    
+    public setScoreLabelText(text:string):void{
+        this.scoreLabel.string=text;
+    }
 }

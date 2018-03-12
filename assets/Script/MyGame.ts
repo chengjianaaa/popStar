@@ -27,7 +27,6 @@ export class MyGame extends cc.Component {
         this._score=this.getScoreWithLocal();
         cc.director.setDisplayStats(false);
         
-        this.title.active=true;
         this.gameBg.active=false;
         this.levelStartText.active=false;
         this.map.active=false;
@@ -35,6 +34,8 @@ export class MyGame extends cc.Component {
         
         LocalManager.removeItem("score");
         cc.log(this._score);
+        
+        this.gotoTitle();
     }
     
     private getScoreWithLocal():number{
@@ -47,6 +48,7 @@ export class MyGame extends cc.Component {
     public gotoTitle():void{
         cc.log("gotoTitle");
         this.title.active=true;
+        cc.log("frameSize:"+cc.view.getFrameSize(),"visibleSize:"+cc.director.getVisibleSize());
     }
     public gotoSelectLevel():void{
         cc.log("gotoSelectLevel");
@@ -87,7 +89,14 @@ export class MyGame extends cc.Component {
         let bottomLeft=cc.p(-size.width*0.5+48*0.5,-size.height*0.5+48*0.5);
         this.map.setPosition(bottomLeft);
         this.map.active=true;
+        this.map.width=480;
+        this.map.height=480;
+        var mapWidget=this.map.getComponent(cc.Widget);
+        mapWidget.enabled=true;
+        
     }
+    
+    
     
     public getComputeScoreWithCount(popCount:number):number{
         return (popCount-1)*10+5;

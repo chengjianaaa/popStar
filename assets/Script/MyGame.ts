@@ -87,7 +87,7 @@ export class MyGame extends cc.Component {
         cc.log("layoutBlocks=======");
         let size=cc.director.getVisibleSize();
         let bottomLeft=cc.p(-size.width*0.5+48*0.5,-size.height*0.5+48*0.5);
-        this.map.setPosition(bottomLeft);
+        //this.map.setPosition(bottomLeft);
         this.map.active=true;
     }
     

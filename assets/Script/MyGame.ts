@@ -48,7 +48,7 @@ export class MyGame extends cc.Component {
     public gotoTitle():void{
         cc.log("gotoTitle");
         this.title.active=true;
-        cc.log("frameSize:"+cc.view.getFrameSize(),"visibleSize:"+cc.director.getVisibleSize());
+        cc.log("frameSize:"+cc.view.getFrameSize(),"visibleSize:"+cc.director.getVisibleSize(),cc.director.getWinSizeInPixels());
     }
     public gotoSelectLevel():void{
         cc.log("gotoSelectLevel");
@@ -89,11 +89,6 @@ export class MyGame extends cc.Component {
         let bottomLeft=cc.p(-size.width*0.5+48*0.5,-size.height*0.5+48*0.5);
         this.map.setPosition(bottomLeft);
         this.map.active=true;
-        this.map.width=480;
-        this.map.height=480;
-        var mapWidget=this.map.getComponent(cc.Widget);
-        mapWidget.enabled=true;
-        
     }
     
     

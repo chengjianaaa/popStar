@@ -12,7 +12,7 @@ export class LevelStartText extends cc.Component {
     private onComplete:Function;
     private onCompleteThis:any;
 
-    public onLoad(){
+    public start(){
         let size=cc.director.getWinSizeInPixels();
         
         this.levelNum.x=-(size.width*0.5+this.levelNum.width*0.5);

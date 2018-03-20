@@ -22,7 +22,7 @@ export class MyGame extends cc.Component {
     private _level:number;
     private _score:number;
    
-    public onLoad() {
+    public start() {
         cc.log("=== start Game ===");
         this._score=this.getScoreWithLocal();
         cc.director.setDisplayStats(false);
@@ -48,7 +48,6 @@ export class MyGame extends cc.Component {
     public gotoTitle():void{
         cc.log("gotoTitle");
         this.title.active=true;
-        cc.log("frameSize:"+cc.view.getFrameSize(),"visibleSize:"+cc.director.getVisibleSize(),cc.director.getWinSizeInPixels());
     }
     public gotoSelectLevel():void{
         cc.log("gotoSelectLevel");
@@ -85,19 +84,21 @@ export class MyGame extends cc.Component {
     }
     private layoutLevel():void{
         cc.log("layoutBlocks=======");
-        let size=cc.director.getVisibleSize();
-        let bottomLeft=cc.p(-size.width*0.5+48*0.5,-size.height*0.5+48*0.5);
-        //this.map.setPosition(bottomLeft);
+        let visibleSize=cc.director.getVisibleSize();
+        let resolutionSize=cc.view.getDesignResolutionSize();
+        let sx=visibleSize.width/resolutionSize.width;
+        let bottomLeft=cc.p(-visibleSize.width*0.5+48*0.5,-visibleSize.height*0.5+48*0.5);
+        
+        this.map.setPosition(bottomLeft);
+        this.map.scale=sx;
         this.map.active=true;
     }
-    
-    
     
     public getComputeScoreWithCount(popCount:number):number{
         return (popCount-1)*10+5;
     }
     public addScore(value:number):void{
-        this.setScore(this._score=value);
+        this.setScore(this._score+value);
     }
     public setScore(value:number):void{
         this._score=value;

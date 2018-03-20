@@ -8,7 +8,7 @@ export class MessageUI extends cc.Component {
     private game:MyGame=null;
     @property(cc.Label)
     private scoreLabel:cc.Label=null;
-    public onLoad():void{
+    public start():void{
         
     }
     

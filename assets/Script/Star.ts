@@ -17,7 +17,7 @@ export class Star extends cc.Component {
         this._type=type;
     }
     
-    public onLoad():void{
+    public start():void{
         this.node.on(cc.Node.EventType.TOUCH_END,this.onTouchEnd,this);
     }
 

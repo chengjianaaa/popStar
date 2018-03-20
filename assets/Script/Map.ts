@@ -24,9 +24,14 @@ export class Map extends cc.Component {
 	private _starsBoard:StarsBoard;
 	private _stars:Star[][];
 
-	public onLoad():void{
+	public start():void{
 		this.initStarsBoard();
+        this.node.on(cc.Node.EventType.TOUCH_END,this.onTouchEnd);
 	}
+    
+    private onTouchEnd(e:cc.Event.EventTouch):void{
+        cc.log(e.getLocationInView());
+    }
 	
 	private initStarsBoard():void{
 		cc.log("gamelevel:",this.game.level);
@@ -46,7 +51,7 @@ export class Map extends cc.Component {
 				this._stars[x][y]=this.createStarWithType(starType,x,y);
 			}
 		}
-		cc.log(this._starsBoard.toString());
+		//cc.log(this._starsBoard.toString());
 	}
 	
 	private createStarWithType(type:StarType,ix:number,iy:number):Star{
@@ -88,7 +93,7 @@ export class Map extends cc.Component {
             //计算消除得分
             let popCount=popResults.length;
             let score=this.game.getComputeScoreWithCount(popCount);
-            this.game.addScore(score);
+            this.game.addScore(score);//添加得分
             
 			for(let i=0;i<popCount;i++){
 				let posInt=popResults[i];
@@ -100,12 +105,12 @@ export class Map extends cc.Component {
 			//2.下落
 			let dropResults:ChangeResult[]=this._starsBoard.drop(popResultsRect);//输出需要掉落星星和它新位置
 			this.changeStarsWithResults(dropResults);
-			cc.log(this._starsBoard.toString());
+			//cc.log(this._starsBoard.toString());
             
 			//3.左移
 			let moveToLeftResults:ChangeResult[]=this._starsBoard.moveToLeft(popResultsRect);//输出需要左移星星和它新位置
 			this.changeStarsWithResults(moveToLeftResults);
-			cc.log(this._starsBoard.toString());
+			//cc.log(this._starsBoard.toString());
 		}
 	}
 	
@@ -125,6 +130,11 @@ export class Map extends cc.Component {
 			}
 		}
 	}
+    
+    public onDestroy():void{
+        this.node.off(cc.Node.EventType.TOUCH_END,this.onTouchEnd);
+    }
+    
     
 	
 }

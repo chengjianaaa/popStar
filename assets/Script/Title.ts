@@ -6,10 +6,10 @@ export class Title extends cc.Component {
     @property(MyGame)
     public game:MyGame=null;
 
-    protected onLoad() {
-        cc.log("===title on load");
+    protected start() {
+        cc.log("===title start");
         var title_bg:cc.Node=this.node.getChildByName("title_bg");
-        //title_bg.getComponent(cc.Widget).target=cc.Canvas.instance.node;
+        title_bg.getComponent(cc.Widget).target=cc.Canvas.instance.node;
     }
     
     public clickHandler(event:TouchEvent,data:string):void{

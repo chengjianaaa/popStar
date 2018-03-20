@@ -21,16 +21,30 @@ export class Map extends cc.Component {
 	private yStar:cc.Prefab=null;
 	@property(cc.Vec2)
 	private cellSize:cc.Vec2=null;
+	@property(cc.Node)
+	private canvasNode:cc.Node=null;
+	@property
+	private xNum:number=10;
+	@property
+	private yNum:number=10;
+	
 	private _starsBoard:StarsBoard;
 	private _stars:Star[][];
 
 	public start():void{
 		this.initStarsBoard();
-        this.node.on(cc.Node.EventType.TOUCH_END,this.onTouchEnd);
+		this.canvasNode.on(cc.Node.EventType.TOUCH_END,this.onTouchEnd,this);
 	}
     
     private onTouchEnd(e:cc.Event.EventTouch):void{
-        cc.log(e.getLocationInView());
+		let touchPos:cc.Vec2=this.node.convertTouchToNodeSpaceAR(e.touch);
+		let ix=(touchPos.x+this.cellSize.x*0.5)/this.cellSize.x;
+		let iy=(touchPos.y+this.cellSize.y*0.5)/this.cellSize.y;
+		ix=ix|0;
+		iy=iy|0;
+		ix=Math.min(ix,this.xNum);
+		iy=Math.min(iy,this.yNum);
+		this.popAndDrop(ix,iy);
     }
 	
 	private initStarsBoard():void{
@@ -38,7 +52,7 @@ export class Map extends cc.Component {
 		//let levelData=LevelData.getData(this.game.level);
 		let levelData=LevelData.getRandomData();
 		this._starsBoard=new StarsBoard();
-		this._starsBoard.init(10,10);
+		this._starsBoard.init(this.xNum,this.yNum);
 		this._starsBoard.setWithData(levelData);
 		
 		this._stars=[];
@@ -130,10 +144,16 @@ export class Map extends cc.Component {
 			}
 		}
 	}
+	
+	public onDisable():void{
+		this.canvasNode.off(cc.Node.EventType.TOUCH_END,this.onTouchEnd);
+	}
     
     public onDestroy():void{
-        this.node.off(cc.Node.EventType.TOUCH_END,this.onTouchEnd);
-    }
+        this.canvasNode.off(cc.Node.EventType.TOUCH_END,this.onTouchEnd);
+	}
+	
+	public get CellSize():cc.Vec2{return this.cellSize;}
     
     
 	

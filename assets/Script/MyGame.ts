@@ -79,15 +79,14 @@ export class MyGame extends cc.Component {
         let levelStartTextScript=this.levelStartText.getComponent(LevelStartText);
         levelStartTextScript.setData(level,LevelData.getTargetScore(level));
         levelStartTextScript.setOnCompleteCallback(this.layoutLevel,this);
-        
-        
     }
     private layoutLevel():void{
         cc.log("layoutBlocks=======");
         let visibleSize=cc.director.getVisibleSize();
         let resolutionSize=cc.view.getDesignResolutionSize();
         let sx=visibleSize.width/resolutionSize.width;
-        let bottomLeft=cc.p(-visibleSize.width*0.5+48*0.5,-visibleSize.height*0.5+48*0.5);
+        let cellSize=this.map.getComponent(Map).CellSize;
+        let bottomLeft=cc.p(-visibleSize.width*0.5+cellSize.x*0.5,-visibleSize.height*0.5+cellSize.y*0.5);
         
         this.map.setPosition(bottomLeft);
         this.map.scale=sx;

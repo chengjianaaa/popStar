@@ -18,19 +18,11 @@ export class Star extends cc.Component {
     }
     
     public start():void{
-        this.node.on(cc.Node.EventType.TOUCH_END,this.onTouchEnd,this);
-    }
-
-    private onTouchEnd(e:cc.Event.EventTouch):void{
-        this._map.popAndDrop(this._posInt.x,this._posInt.y);
+        
     }
     
     public tweenDestroy():void{
         this.node.destroy();
-    }
-
-    public onDisable():void{
-        this.node.off(cc.Node.EventType.TOUCH_END,this.onTouchEnd,this);
     }
     
     public setPosInt(ix:number,iy:number):void{

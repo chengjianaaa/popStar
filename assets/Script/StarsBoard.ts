@@ -158,11 +158,23 @@ export class StarsBoard extends cc.Object {
 	/**检测是否消除完毕*/
 	public isPopEnd():boolean{
 		let result=true;
+		//检测竖向是否有相同的方块
 		for(let x=0;x<this._xNum;x++){
 			for(let y=1;y<this._yNum;y++){
 				let pre=this._list[x][y-1];
 				let current=this._list[x][y];
 				if(pre==current&&!this.isEmptyXY(x,y-1)){
+					result=false;
+					break;
+				}
+			}
+		}
+		//检测横向是否有相同的方块
+		for(let y=0;y<this._yNum;y++){
+			for(let x=1;x<this._xNum;x++){
+				let pre=this._list[x-1][y];
+				let current=this._list[x][y];
+				if(pre==current&&!this.isEmptyXY(x-1,y)){
 					result=false;
 					break;
 				}

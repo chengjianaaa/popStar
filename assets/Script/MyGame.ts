@@ -32,7 +32,7 @@ export class MyGame extends cc.Component {
         this.map.active=false;
         this.messageUI.active=false;
         
-        LocalManager.removeItem("score");
+        //LocalManager.removeItem("score");
         cc.log(this._score);
         
         this.gotoTitle();
@@ -44,6 +44,12 @@ export class MyGame extends cc.Component {
     private saveScoreToLocal():void{
         LocalManager.setInt("score",this._score);
     }
+    public getLevelWithLocal():number{
+        return LocalManager.getInt("level",1);
+    }
+    private saveLevelToLocal():void{
+        LocalManager.setInt("level",this._level);
+    }
     
     public gotoTitle():void{
         cc.log("gotoTitle");
@@ -54,7 +60,10 @@ export class MyGame extends cc.Component {
     }
     public win():void{
         cc.log("win");
-        let graphics=this.addComponent(cc.Graphics);
+        //保存当前关卡数
+        this._level++;
+        this.saveLevelToLocal();
+        this.gotoLevel(this._level);
     }
     public faiure():void{
 		cc.log("faiure");
@@ -80,12 +89,13 @@ export class MyGame extends cc.Component {
         levelStartTextScript.setData(level,LevelData.getTargetScore(level));
         levelStartTextScript.setOnCompleteCallback(this.layoutLevel,this);
     }
+    
     private layoutLevel():void{
         cc.log("layoutBlocks=======");
         let visibleSize=cc.director.getVisibleSize();
         let resolutionSize=cc.view.getDesignResolutionSize();
         let sx=visibleSize.width/resolutionSize.width;
-        let cellSize=this.map.getComponent(Map).CellSize;
+        let cellSize=this.map.getComponent(Map).getCellSize();
         let bottomLeft=cc.p(-visibleSize.width*0.5+cellSize.x*0.5,-visibleSize.height*0.5+cellSize.y*0.5);
         
         this.map.setPosition(bottomLeft);

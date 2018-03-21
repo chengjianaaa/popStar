@@ -16,7 +16,7 @@ export class Title extends cc.Component {
         cc.log(event.type);
         switch(data){
             case "startGame":
-            this.game.gotoLevel(1);
+            this.game.gotoLevel(this.game.getLevelWithLocal());
             this.node.destroy();
             break;
         }

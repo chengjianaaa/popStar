@@ -34,6 +34,7 @@ export class Map extends cc.Component {
 	public start():void{
 		this.initStarsBoard();
 		this.canvasNode.on(cc.Node.EventType.TOUCH_END,this.onTouchEnd,this);
+		cc.log("map start");
 	}
     
     private onTouchEnd(e:cc.Event.EventTouch):void{
@@ -45,6 +46,7 @@ export class Map extends cc.Component {
 		ix=Math.min(ix,this.xNum);
 		iy=Math.min(iy,this.yNum);
 		this.popAndDrop(ix,iy);
+		if(this.isPopEnd()) this.game.win();
     }
 	
 	private initStarsBoard():void{
@@ -98,7 +100,7 @@ export class Map extends cc.Component {
 		return star;
 	}
 	
-	public popAndDrop(ix:number,iy:number):void{
+	private popAndDrop(ix:number,iy:number):void{
 		let popResults:cc.Vec2[]=[];
 		let popMinNum:number=2;//最小能消除的数量
 		//1.消除
@@ -113,7 +115,7 @@ export class Map extends cc.Component {
 				let posInt=popResults[i];
 				
 				let star=this._stars[posInt.x][posInt.y];
-				star.tweenDestroy();
+				if(star)star.tweenDestroy();
 				this._stars[posInt.x][posInt.y]=null;
 			}
 			//2.下落
@@ -128,11 +130,11 @@ export class Map extends cc.Component {
 		}
 	}
 	
-	public isPopEnd():boolean{
+	private isPopEnd():boolean{
 		return this._starsBoard.isPopEnd();
 	}
 	
-	public changeStarsWithResults(results:ChangeResult[]):void{
+	private changeStarsWithResults(results:ChangeResult[]):void{
 		for(let i=0;i<results.length;i++){
 			let result=results[i];
 			let star=this._stars[result.pos.x][result.pos.y];
@@ -153,7 +155,7 @@ export class Map extends cc.Component {
         this.canvasNode.off(cc.Node.EventType.TOUCH_END,this.onTouchEnd);
 	}
 	
-	public get CellSize():cc.Vec2{return this.cellSize;}
+	public getCellSize():cc.Vec2{return this.cellSize;}
     
     
 	

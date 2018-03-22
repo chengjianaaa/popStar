@@ -149,6 +149,8 @@ export class Map extends cc.Component {
 	
 	public onDisable():void{
 		this.canvasNode.off(cc.Node.EventType.TOUCH_END,this.onTouchEnd);
+		this._starsBoard.destroy();
+		
 	}
     
     public onDestroy():void{

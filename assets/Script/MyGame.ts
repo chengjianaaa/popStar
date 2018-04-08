@@ -75,13 +75,15 @@ export class MyGame extends cc.Component {
     
     public gotoLevel(level:number):void{
         cc.log("gotoLevel");
+        //
+        
+        //
         this._level=level;
         //吊销标题界面
         this.title.active=false;
         //游戏背景图
         this.gameBg.active=true;
         //信息面板
-        cc.log(this.isValid);
         this.messageUI.active=true;
         //进入关卡前显示的目标分动画
         this.levelStartText.active=true;
@@ -92,9 +94,9 @@ export class MyGame extends cc.Component {
     
     private layoutLevel():void{
         cc.log("layoutBlocks=======");
-        let visibleSize=cc.director.getVisibleSize();
-        let resolutionSize=cc.view.getDesignResolutionSize();
-        let sx=visibleSize.width/resolutionSize.width;
+        let visibleSize=cc.director.getWinSize();
+        
+        let sx=visibleSize.width/480;
         let cellSize=this.map.getComponent(Map).getCellSize();
         let bottomLeft=cc.p(-visibleSize.width*0.5+cellSize.x*0.5,-visibleSize.height*0.5+cellSize.y*0.5);
         

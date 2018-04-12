@@ -1,10 +1,10 @@
-import { StarType } from "./StarType";
-import { Map } from "./Map";
+import {StarType} from "./StarType";
+import Map from "./Map";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export class Star extends cc.Component {
+export default class Star extends cc.Component {
     
     private _posInt:cc.Vec2;
     private _type:StarType;
@@ -17,7 +17,7 @@ export class Star extends cc.Component {
         this._type=type;
     }
     
-    public start():void{
+    protected start():void{
         
     }
     
@@ -34,7 +34,7 @@ export class Star extends cc.Component {
         this.node.setPosition(x,y);
     }
     
-    public onDestroy():void{
+    protected onDestroy():void{
         this._posInt=null;
         this._type=null;
         this._map=null;

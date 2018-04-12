@@ -1,9 +1,9 @@
 const {ccclass, property} = cc._decorator;
-import { MyGame } from "./MyGame";
-import { LevelData } from "./LevelData";
+import MyGame from "./MyGame";
+import LevelData from "./LevelData";
 
 @ccclass
-export class LevelStartText extends cc.Component {
+export default class LevelStartText extends cc.Component {
     @property(cc.Node)
     private levelNum:cc.Node=null;
     @property(cc.Node)
@@ -11,8 +11,20 @@ export class LevelStartText extends cc.Component {
 
     private onComplete:Function;
     private onCompleteThis:any;
+    private _initLevelNumPos:cc.Vec2=null;
+    private _initTargetScorePos:cc.Vec2=null;
 
-    public start(){
+    protected start(){
+        this._initLevelNumPos=this.levelNum.getPosition().clone();
+        this._initTargetScorePos=this.targetScore.getPosition().clone();
+    }
+    
+    protected onEnable():void{
+        if(this._initLevelNumPos)this.levelNum.setPosition(this._initLevelNumPos);
+        if(this._initTargetScorePos)this.targetScore.setPosition(this._initTargetScorePos);
+        this.levelNum.active=true;
+        this.targetScore.active=true;
+        
         let size=cc.director.getWinSizeInPixels();
         
         this.levelNum.x=-(size.width*0.5+this.levelNum.width*0.5);
@@ -39,6 +51,11 @@ export class LevelStartText extends cc.Component {
         if(this.onComplete!=null){
             this.onComplete.apply(this.onCompleteThis);
         }
+    }
+    
+    protected onDisable():void{
+        this.levelNum.active=false;
+        this.targetScore.active=false;
     }
     
     public setOnCompleteCallback(complete:Function,thisObj:any):void{

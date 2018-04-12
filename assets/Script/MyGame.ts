@@ -1,11 +1,11 @@
 const {ccclass, property} = cc._decorator;
-import {LevelStartText} from "./LevelStartText";
-import{Map}from"./Map";
-import { LevelData } from "./LevelData";
-import { LocalManager } from "./LocalManager";
-import { MessageUI } from "./MessageUI";
+import LevelStartText from "./LevelStartText";
+import LevelData from "./LevelData";
+import LocalManager from "./LocalManager";
+import MessageUI from "./MessageUI";
+import Map from "./Map";
 @ccclass 
-export class MyGame extends cc.Component {
+export default class MyGame extends cc.Component {
     @property(cc.Node)
     private canvas:cc.Node=null;
     @property(cc.Node)
@@ -22,7 +22,7 @@ export class MyGame extends cc.Component {
     private _level:number;
     private _score:number;
    
-    public start() {
+    protected start() {
         cc.log("=== start Game ===");
         this._score=this.getScoreWithLocal();
         cc.director.setDisplayStats(false);
@@ -69,7 +69,7 @@ export class MyGame extends cc.Component {
 		cc.log("faiure");
     }
     
-    public update(dt:number):void{
+    protected update(dt:number):void{
         
     }
     
@@ -101,6 +101,7 @@ export class MyGame extends cc.Component {
         let bottomLeft=cc.p(-visibleSize.width*0.5+cellSize.x*0.5,-visibleSize.height*0.5+cellSize.y*0.5);
         
         this.map.setPosition(bottomLeft);
+        this.map.getComponent(Map).init();
         this.map.scale=sx;
         this.map.active=true;
     }

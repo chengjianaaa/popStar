@@ -1,7 +1,7 @@
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export class LocalManager extends cc.Component{
+export default class LocalManager extends cc.Component{
     public static getItem(key:string):any{
         return JSON.parse(cc.sys.localStorage.getItem(key));
     }

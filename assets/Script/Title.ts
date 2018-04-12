@@ -1,8 +1,8 @@
-import { MyGame } from "./MyGame";
+import MyGame from "./MyGame";
 
 const {ccclass, property} = cc._decorator;
 @ccclass
-export class Title extends cc.Component {
+export default class Title extends cc.Component {
     @property(MyGame)
     public game:MyGame=null;
 

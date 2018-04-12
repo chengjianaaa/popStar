@@ -52,7 +52,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "game",
+    "_name": "myGame",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -958,7 +958,9 @@
     },
     "canvasNode": {
       "__id__": 4
-    }
+    },
+    "xNum": 10,
+    "yNum": 10
   },
   {
     "__type__": "cc.Node",

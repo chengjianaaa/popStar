@@ -2,7 +2,7 @@ import { StarType } from "./StarType";
 
 const {ccclass,property}=cc._decorator;
 @ccclass
-export class LevelData extends cc.Object{
+export default class LevelData extends cc.Object{
     
     public static getRandomData():number[]{
         let starTypes=[

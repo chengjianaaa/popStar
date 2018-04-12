@@ -1,8 +1,9 @@
 import { StarType } from "./StarType";
 
+
 const { ccclass, property } = cc._decorator;
 @ccclass 
-export class StarsBoard extends cc.Object {
+export default class StarsBoard extends cc.Object {
 	private _list:number[][];
 	private _xNum:number;
 	private _yNum:number;

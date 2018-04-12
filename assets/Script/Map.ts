@@ -1,12 +1,12 @@
 const {ccclass, property} = cc._decorator;
-import { StarsBoard, ChangeResult } from "./StarsBoard";
-import { LevelData } from "./LevelData";
+import LevelData from "./LevelData";
 import { StarType } from "./StarType";
-import { Star } from "./Star";
-import { MyGame } from "./MyGame";
+import Star from "./Star";
+import MyGame from "./MyGame";
+import StarsBoard, { ChangeResult } from "./StarsBoard";
 
 @ccclass
-export class Map extends cc.Component {
+export default class Map extends cc.Component {
 	@property(MyGame)
 	private game:MyGame=null;
 	@property(cc.Prefab)
@@ -31,10 +31,13 @@ export class Map extends cc.Component {
 	private _starsBoard:StarsBoard;
 	private _stars:Star[][];
 
-	public start():void{
-		this.initStarsBoard();
+	protected start():void{
+		
+	}
+	
+	public init():void{
 		this.canvasNode.on(cc.Node.EventType.TOUCH_END,this.onTouchEnd,this);
-		cc.log("map start");
+		this.initStarsBoard();
 	}
     
     private onTouchEnd(e:cc.Event.EventTouch):void{
@@ -46,7 +49,10 @@ export class Map extends cc.Component {
 		ix=Math.min(ix,this.xNum);
 		iy=Math.min(iy,this.yNum);
 		this.popAndDrop(ix,iy);
-		if(this.isPopEnd()) this.game.win();
+		if(this.isPopEnd()){
+			this.clear();
+			this.game.win();
+		}
     }
 	
 	private initStarsBoard():void{
@@ -147,14 +153,22 @@ export class Map extends cc.Component {
 		}
 	}
 	
-	public onDisable():void{
-		this.canvasNode.off(cc.Node.EventType.TOUCH_END,this.onTouchEnd);
+	private clear():void{
+		for(let i=0;i<this._stars.length;i++){
+			for(let j=0;j<this._stars[i].length;j++){
+				let star=this._stars[i][j];
+				if(star){
+					if(star.node)star.node.destroy();
+				}
+				this._stars[i][j]=null;
+			}
+		}
+		this.canvasNode.off(cc.Node.EventType.TOUCH_END,this.onTouchEnd,this);
 		this._starsBoard.destroy();
-		
 	}
     
-    public onDestroy():void{
-        this.canvasNode.off(cc.Node.EventType.TOUCH_END,this.onTouchEnd);
+    protected onDestroy():void{
+        this.clear();
 	}
 	
 	public getCellSize():cc.Vec2{return this.cellSize;}

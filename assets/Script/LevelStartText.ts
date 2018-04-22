@@ -15,11 +15,13 @@ export default class LevelStartText extends cc.Component {
     private _initTargetScorePos:cc.Vec2=null;
 
     protected start(){
+        cc.log("start levelStartText");
         this._initLevelNumPos=this.levelNum.getPosition().clone();
         this._initTargetScorePos=this.targetScore.getPosition().clone();
     }
     
     protected onEnable():void{
+        cc.log("this._initLevelNumPos:",this._initLevelNumPos);
         if(this._initLevelNumPos)this.levelNum.setPosition(this._initLevelNumPos);
         if(this._initTargetScorePos)this.targetScore.setPosition(this._initTargetScorePos);
         this.levelNum.active=true;
@@ -54,6 +56,7 @@ export default class LevelStartText extends cc.Component {
     }
     
     protected onDisable():void{
+        cc.log("onDisable levelstarttext");
         this.levelNum.active=false;
         this.targetScore.active=false;
     }

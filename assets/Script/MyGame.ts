@@ -63,6 +63,7 @@ export default class MyGame extends cc.Component {
         //保存当前关卡数
         this._level++;
         this.saveLevelToLocal();
+        this.destroyCurLevel();
         this.gotoLevel(this._level);
     }
     public faiure():void{
@@ -92,8 +93,15 @@ export default class MyGame extends cc.Component {
         levelStartTextScript.setOnCompleteCallback(this.layoutLevel,this);
     }
     
+    private destroyCurLevel():void{
+        //this.messageUI.clear
+        
+    }
+    
     private layoutLevel():void{
         cc.log("layoutBlocks=======");
+        this.levelStartText.active=false;
+        //
         let visibleSize=cc.director.getWinSize();
         
         let sx=visibleSize.width/480;
